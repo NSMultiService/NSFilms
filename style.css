@@ -175,11 +175,10 @@ strong {
 .modal {
     display: none;
     position: fixed;
-    top: 0px;
-    left: 0;
-    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    max-width: 400px;
     height: 100%;
     background-color: white;
     justify-content: center;
@@ -247,17 +246,17 @@ strong {
 
 @media (max-width: 600px) {
 
-      
-    .head{
-     padding-top: 20px;
+
+    .head {
+        background-color: #2196F3;
     }
 
     header .head-bar {
         height: 30px;
         display: flex;
+        padding: 25px;
         flex-wrap: wrap-reverse;
-        gap: 10px;
-        padding:  10px 0 ;
+        justify-content: space-between;
         box-shadow: 0 5px 5px rgb(8, 135, 135);
     }
 
@@ -271,15 +270,15 @@ strong {
     }
 
 
-    .bar-new  {
+    .bar-new {
         position: absolute;
         right: 10px;
     }
-     
 
-       .bar-new img {
+
+    .bar-new img {
         width: 30px;
-        height: 30px;       
+        height: 30px;
 
     }
 
@@ -287,18 +286,20 @@ strong {
         font-size: 1.3rem;
         box-shadow: none;
         position: absolute;
-        top: 5px;
+        top: 2px;
+        left: 30%;
     }
 
     .bar-bienvenue P {
         font-size: 1rem;
     }
-     .bar-bienvenue h6{
+
+    .bar-bienvenue h6 {
         font-size: 0.66rem;
-     }
+    }
 
     .head-bar .bar-search input {
-        width: 90%;
+        width: 100%;
         height: fit-content;
         padding: 7px 7px 7px 30px;
         margin-top: 10px;
@@ -307,37 +308,37 @@ strong {
 
     }
 
-   
+
 
     .bar-search img {
         margin-left: 5px;
-        top: 30px;
+        top: 27px;
+        position: absolute;
         width: 25px;
         height: 25px;
     }
 
 
     .bar-search {
-        width: 80%;
+        width: 90%;
         display: flex;
 
     }
 
-    .modal-content input{
-       height: 12px;
+    .modal-content input {
+        height: 30px;
     }
 
-    .modal-content h2{
-      margin: 5px;
+    .modal-content h2 {
+        margin: 5px;
     }
 
-    .modal-content{
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-       top:13%;
-      
-      
+    .modal {
+
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
     }
 
 
