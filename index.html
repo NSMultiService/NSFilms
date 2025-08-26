@@ -35,40 +35,76 @@
             et détaillée, en toute sécureté. </p>
         <h6> Cliquer sur le boutton plus en haut à droite pour ajouter des
             nouveaux films.</h6>
-       
+
 
     </section>
 
+
+
+    <div id="videoList"></div>
+
+    <div class="home-page">
+        <div class="film-item">
+            <div class="video-poste">
+                <video controls>
+                    <source src="videos/video11.mp4" type="">
+                </video>
+                <div class="video-title">
+                    <h2>Title: Le langage du coeur</h2>
+                </div>
+                <div class="video-user"> Author: Naderplus</div>
+                <div class="video-meta">
+                    <div class="video-year"> Year: 2025 &ndash;</div>
+                    <div class="video-genre"> Genre: Événementielle &nbsp;</div>
+                </div>
+
+            </div>
+    </div>
+    <div class="home-page">
+        <div class="film-item">
+            <div class="video-poste">
+                <video controls>
+                    <source src="videos/ideo10.mp4" type="">
+                </video>
+                <div class="video-title">
+                    <h2>Title: Fête des mères</h2>
+                </div>
+                <div class="video-user"> Author: Love Décor </div>
+                <div class="video-meta">
+                    <div class="video-year"> Year: 2025 &ndash;</div>
+                    <div class="video-genre"> Genre: Événementielle &nbsp;</div>
+                </div>
+
+            </div>
+    </div>
     
 
-<div id="videoList"></div>
 
 
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>Ajouter une vidéo</h2>
+                <form id="filmForm">
+                    <label>Titre:</label>
+                    <input type="text" id="filmTitle" required> <br>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h2>Ajouter une vidéo</h2>
-            <form id="filmForm">
-                <label>Titre:</label>
-                <input type="text" id="filmTitle" required> <br>
+                    <label>Auteur:</label>
+                    <input type="text" id="filmAuthor" required> <br>
 
-                <label>Auteur:</label>
-                <input type="text" id="filmAuthor" required> <br>
-                
-                <label>Genre:</label>
-                <input type="text" id="filmGenre" required> <br>
+                    <label>Genre:</label>
+                    <input type="text" id="filmGenre" required> <br>
 
-                <label>Année:</label>
-                <input type="number" id="filmYear" required> <br> <br>
+                    <label>Année:</label>
+                    <input type="number" id="filmYear" required> <br> <br>
 
-                <button type="submit">Enregistrer</button>
-                <button type="button" id="cancelBtn">Annuler</button>
+                    <button type="submit">Enregistrer</button>
+                    <button type="button" id="cancelBtn">Annuler</button>
 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>

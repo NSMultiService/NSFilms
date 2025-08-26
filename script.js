@@ -1,8 +1,8 @@
 //selection des éléments
 
 //const uploadFile = document.getElementById("uploadFile");
-const uploadInput = document.getElementById("uploadFile");
 const videoList = document.getElementById("videoList");
+const uploadInput = document.getElementById("uploadFile");
 
 //modal
 const modal = document.getElementById("modal");
@@ -81,14 +81,13 @@ function addFilmToDOM(id, src, type, title, author, genre, year) {
     <video controls>
     <source src="${src}" type="${type}">
     </video>
-    <div class="poste">
      <div class="video-title"><h2>Title:${title}</h2></div>
    <div class="video-user"> Author: ${author}</div>
    <div class="video-meta">
    <div class="video-year"> Year: ${year}&ndash;</div>
    <div class="video-genre"> Genre: &nbsp;${genre}</div>
    </div>
-   </div>
+   
      <div class="video-actions">
      <button class="editBtn">Modifier</button>
      <button class="deleteBtn">Supprimer</button>
