@@ -1,23 +1,22 @@
-
-body{
+body {
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 0;
-    
-    
+
+
 }
 
 /*******************************HEADER******************************/
-header{
+header {
     top: 0;
     z-index: 9999999;
 }
 
-.head{
+.head {
     position: sticky;
-    width: 100%;
+
 }
 
-header .head-bar{
+header .head-bar {
     padding: 30px;
     height: 40px;
     background-color: white;
@@ -29,18 +28,18 @@ header .head-bar{
     box-shadow: 0 10px 5px rgb(8, 135, 135);
 }
 
-label{
+label {
     display: flex;
     color: teal;
 }
 
-label img{
+label img {
     width: 50px;
     height: 50px;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
-.bar-search img{
+.bar-search img {
     width: 40px;
     height: 40px;
     margin-top: 3px;
@@ -48,27 +47,28 @@ label img{
     cursor: pointer;
 }
 
-.head-bar .bar-logo{
+.head-bar .bar-logo {
     font-size: 2.5rem;
-    margin-left: 25px;
     box-shadow: 5px 5px 6px 3px #98FB98;
 }
 
-.head-bar .bar-search input{
-    width: 500px;
+.head-bar .bar-search input {
+    width: 100%;
+    max-width: 600px;
     padding: 15px 15px 15px 40px;
     font-size: 1.1rem;
     border-radius: 20px;
-    
+
 }
 
-input[type="file"]{
+input[type="file"] {
     display: none;
 }
 
-.bar-search{
+.bar-search {
+    width: 600;
     display: flex;
-    
+
 }
 
 
@@ -76,7 +76,7 @@ input[type="file"]{
 /************************SECTION BIENVENU****************************/
 
 
-.bar-bienvenue{
+.bar-bienvenue {
     bottom: 20px;
     text-align: center;
     background-color: rgb(25, 128, 128);
@@ -84,25 +84,25 @@ input[type="file"]{
     margin: 15px 0;
 }
 
-.bar-bienvenue h6{
+.bar-bienvenue h6 {
     margin: 5px;
     color: #98FB98;
     font-size: 0.9em;
-    
+
 }
 
 
-.bar-bienvenue P{
+.bar-bienvenue P {
     font-size: 1.2rem;
     margin: 10px 0;
     color: #FFFFFF;
 }
 
-strong{
+strong {
     color: #FFA500;
 }
 
-.bar-bienvenue h1{
+.bar-bienvenue h1 {
     text-transform: uppercase;
     font-size: 2.2rem;
     margin-top: 10px;
@@ -114,7 +114,7 @@ strong{
 
 
 
-.film-item{
+.film-item {
     padding: 5px;
     width: 280px;
     cursor: pointer;
@@ -122,7 +122,7 @@ strong{
     border-radius: 10px;
 }
 
-#videoList{
+#videoList {
     justify-content: center;
     margin: 10px;
     display: flex;
@@ -131,57 +131,62 @@ strong{
 
 }
 
-.home-page{
+.home-page {
     justify-content: center;
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-   
+
 }
 
 
 
-.film-item .video-poste video{
+.film-item .video-poste video {
     width: 100%;
     height: 250px;
     border-radius: 5px;
 }
-.video-title h2{
+
+.video-title h2 {
     margin: 2px;
     font-size: 1.3rem;
     font-weight: bold;
 }
 
-.video-meta{
+.video-meta {
     display: flex;
     color: gray;
 }
 
-.video-title:hover, .video-meta:hover, .video-user:hover{
+.video-title:hover,
+.video-meta:hover,
+.video-user:hover {
     color: teal;
 }
 
-.video-user{
+.video-user {
     color: gray;
 }
 
 /****************************MODAL************************************/
 
 
-.modal{
+.modal {
     display: none;
     position: fixed;
     top: 0px;
     left: 0;
+    display: flex;
     width: 100%;
+    max-width: 400px;
     height: 100%;
     background-color: white;
     justify-content: center;
     align-items: center;
 }
 
-.modal-content{
+.modal-content {
     background: teal;
     padding: 10px;
     border-radius: 10px;
@@ -189,40 +194,40 @@ strong{
     text-align: left;
 }
 
-.modal label{
+.modal label {
     color: #98FB98;
 }
 
-.modal-content h2{
+.modal-content h2 {
     text-align: center;
     color: #98FB98;
 }
 
-.modal-content input{
+.modal-content input {
     width: 96%;
     margin-bottom: 8px;
     padding: 6px;
 }
 
-.modal-content button:hover{
-    background-color:white;
+.modal-content button:hover {
+    background-color: white;
     font-weight: bold;
 }
 
 
-.modal-content button{
+.modal-content button {
     margin-right: 5px;
     padding: 7px 11px;
     font-size: 0.8rem;
     border: none;
-    
+
 }
 
-.video-actions{
+.video-actions {
     margin-top: 10px;
 }
 
-.video-actions button{
+.video-actions button {
     margin-right: 5px;
     padding: 5px 10px;
     border: none;
@@ -230,7 +235,110 @@ strong{
     color: white;
     cursor: pointer;
     border-radius: 4px;
-  }
-  .video-actions button:last-child {
+}
+
+.video-actions button:last-child {
     background: #f44336;
-  }
+}
+
+
+/************************responsive*****************/
+
+
+@media (max-width: 600px) {
+
+      
+    .head{
+     padding-top: 20px;
+    }
+
+    header .head-bar {
+        height: 30px;
+        display: flex;
+        flex-wrap: wrap-reverse;
+        gap: 10px;
+        padding:  10px 0 ;
+        box-shadow: 0 5px 5px rgb(8, 135, 135);
+    }
+
+    .bar-bienvenue h1 {
+        text-transform: uppercase;
+        font-size: 1rem;
+    }
+
+    .bar-new label p {
+        display: none
+    }
+
+
+    .bar-new  {
+        position: absolute;
+        right: 10px;
+    }
+     
+
+       .bar-new img {
+        width: 30px;
+        height: 30px;       
+
+    }
+
+    .head-bar .bar-logo {
+        font-size: 1.3rem;
+        box-shadow: none;
+        position: absolute;
+        top: 5px;
+    }
+
+    .bar-bienvenue P {
+        font-size: 1rem;
+    }
+     .bar-bienvenue h6{
+        font-size: 0.66rem;
+     }
+
+    .head-bar .bar-search input {
+        width: 90%;
+        height: fit-content;
+        padding: 7px 7px 7px 30px;
+        margin-top: 10px;
+        font-size: 0.8rem;
+        border-radius: 20px;
+
+    }
+
+   
+
+    .bar-search img {
+        margin-left: 5px;
+        top: 30px;
+        width: 25px;
+        height: 25px;
+    }
+
+
+    .bar-search {
+        width: 80%;
+        display: flex;
+
+    }
+
+    .modal-content input{
+       height: 12px;
+    }
+
+    .modal-content h2{
+      margin: 5px;
+    }
+
+    .modal-content{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+       top:13%;
+      
+      
+    }
+
+
+}
