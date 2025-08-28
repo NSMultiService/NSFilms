@@ -1,6 +1,7 @@
 //selection des éléments
 
 //const uploadFile = document.getElementById("uploadFile");
+let searchInput = document.getElementById("filmSearch");
 const videoList = document.getElementById("videoList");
 const uploadInput = document.getElementById("uploadFile");
 
@@ -11,7 +12,7 @@ const cancelBtn = document.getElementById("cancelBtn");
 
 //stocker temporairement le fichier selectioner
 let currentFile = null;
-let editingId = null
+let editingId = null;
 
 // quand on selectionne  une video
 uploadInput.addEventListener("change", function () {
@@ -34,31 +35,46 @@ cancelBtn.addEventListener("click", () => {
 
 filmForm.addEventListener("submit", function (e) {
   e.preventDefault();
- 
+
   const title = document.getElementById("filmTitle").value;
   const author = document.getElementById("filmAuthor").value;
   const genre = document.getElementById("filmGenre").value;
   const year = document.getElementById("filmYear").value;
 
-if (editingId){
-  //mode edit
-  updatVideo(editingId, title, author, genre, year);
-  filmForm.reset();
-  modal.style.display = "none";
-  editingId = null; 
-  return
-}
+  if (editingId) {
+    //mode edit
+    updatVideo(editingId, title, author, genre, year);
+    filmForm.reset();
+    modal.style.display = "none";
+    editingId = null;
+    return;
+  }
 
-if (!currentFile) return;
+  if (!currentFile) return;
 
   const reader = new FileReader(); // lecteur des fichier pour transfomer la vidéo en dataURL
   reader.onload = function (ev) {
     const videoData = ev.target.result;
-    
-    // save la vidéo et ses infos
-    const videoId = saveVideo (videoData, currentFile.type, title, author, genre, year);
 
-    addFilmToDOM(videoId, videoData, currentFile.type, title, author, genre, year); //ajouter la vidéo dans la paage
+    // save la vidéo et ses infos
+    const videoId = saveVideo(
+      videoData,
+      currentFile.type,
+      title,
+      author,
+      genre,
+      year
+    );
+
+    addFilmToDOM(
+      videoId,
+      videoData,
+      currentFile.type,
+      title,
+      author,
+      genre,
+      year
+    ); //ajouter la vidéo dans la paage
 
     //réinitialise et ferme la modal
     filmForm.reset();
@@ -73,8 +89,7 @@ function addFilmToDOM(id, src, type, title, author, genre, year) {
   const filmItem = document.createElement("div");
   filmItem.classList.add("film-item");
   filmItem.dataset.id = id;
-  
-  
+
   // la partie html plus infos
   filmItem.innerHTML = `
     <div class= "video-poste">
@@ -95,70 +110,89 @@ function addFilmToDOM(id, src, type, title, author, genre, year) {
    </div>
 
     `;
-    
-    
-    //écouteur pour supprimer
-    filmItem.querySelector(".deleteBtn").addEventListener("click", () =>{
-      deleteVideo(id, filmItem)
-    });
-    
-    //écouteur pour modifier
-    filmItem.querySelector(".editBtn").addEventListener("click", () => {
-      editVideo(id, title, author, genre, year)
-    });
 
-    // ajouter la vidéo dans a liste d'afficharge
-    videoList.appendChild(filmItem);
-  }
+    //les événnement sur input search
+searchInput.addEventListener("input", function () {
+
+  let texte = searchInput.value.toLowerCase();
+
+  let films = document.querySelectorAll(".film-item");
+
+  films.forEach((film) => {
+    //verifier si lexte tape est dans le titre
+    if (film.textContent.toLowerCase().includes(texte)) {
+      film.style.display = "block";
+    } else {
+      film.style.display = "none";
+    }
+  });
+});
+
+  //écouteur pour supprimer
+  filmItem.querySelector(".deleteBtn").addEventListener("click", () => {
+    deleteVideo(id, filmItem);
+  });
+
+  //écouteur pour modifier
+  filmItem.querySelector(".editBtn").addEventListener("click", () => {
+    editVideo(id, title, author, genre, year);
+  });
+
+  // ajouter la vidéo dans a liste d'afficharge
+  videoList.appendChild(filmItem);
+}
 
 //===========fonction supprimer
 
-function deleteVideo(id, element){
+function deleteVideo(id, element) {
   //supprime dom
   element.remove();
 
-
-//supprime aussi du localStorage
-let videos = JSON.parse(localStorage.getItem("videos")) || [];
-videos = videos.filter((video)=> video.id !== id);
-localStorage.setItem("videos", JSON.stringify(videos));
+  //supprime aussi du localStorage
+  let videos = JSON.parse(localStorage.getItem("videos")) || [];
+  videos = videos.filter((video) => video.id !== id);
+  localStorage.setItem("videos", JSON.stringify(videos));
 }
 
+function editVideo(id, title, author, genre, year) {
+  //reouvrir le modal avec les anciennes l'infos
+  modal.style.display = "flex";
 
-function editVideo(id, title, author, genre, year){
-//reouvrir le modal avec les anciennes l'infos
-modal.style.display = "flex";
+  document.getElementById("filmTitle").value = title;
+  document.getElementById("filmAuthor").value = author;
+  document.getElementById("filmGenre").value = genre;
+  document.getElementById("filmYear").value = year;
 
-document.getElementById("filmTitle").value = title;
-document.getElementById("filmAuthor").value = author;
-document.getElementById("filmGenre").value = genre;
-document.getElementById("filmYear").value = year;
-
-editingId = id;
+  editingId = id;
 }
 
-function updatVideo(id, newTitle, newAuthor, newGenre, newYear){
+function updatVideo(id, newTitle, newAuthor, newGenre, newYear) {
   //localstorage
   let videos = JSON.parse(localStorage.getItem("videos")) || [];
- videos = videos.map ((video) =>{
-  if(video.id === id){
-    return{ ...video, title: newTitle, author: newAuthor, genre: newGenre, year: newYear};
+  videos = videos.map((video) => {
+    if (video.id === id) {
+      return {
+        ...video,
+        title: newTitle,
+        author: newAuthor,
+        genre: newGenre,
+        year: newYear,
+      };
+    }
 
-  }
-  
-  return video;
- });
- localStorage.setItem("videos", JSON.stringify(videos));
+    return video;
+  });
+  localStorage.setItem("videos", JSON.stringify(videos));
 
- //dom
- const element = document.querySelector(`.film-item[data-id="${id}"]`);
- if(!element) return;
- element.querySelector(".video-title").innerHTML = `<h2>Title: ${newTitle}</h2>`
-  element.querySelector(".video-user").innerText = `Author: ${newAuthor}`
-  element.querySelector(".video-year").innerText = `Year: ${newYear}`
-  element.querySelector(".video-genre").innerText = `Genre: ${newGenre}`
-
-
+  //dom
+  const element = document.querySelector(`.film-item[data-id="${id}"]`);
+  if (!element) return;
+  element.querySelector(
+    ".video-title"
+  ).innerHTML = `<h2>Title: ${newTitle}</h2>`;
+  element.querySelector(".video-user").innerText = `Author: ${newAuthor}`;
+  element.querySelector(".video-year").innerText = `Year: ${newYear}`;
+  element.querySelector(".video-genre").innerText = `Genre: ${newGenre}`;
 }
 
 
@@ -167,7 +201,6 @@ function updatVideo(id, newTitle, newAuthor, newGenre, newYear){
 // filmForm.onsubmit = function (e){
 //   e.preventDefault();
 
-
 // //nouvelles valeurs
 // const newTitle = document.getElementById("filmTitle").value;
 //   const newAuthor = document.getElementById("filmAuthor").value;
@@ -175,47 +208,48 @@ function updatVideo(id, newTitle, newAuthor, newGenre, newYear){
 //   const newYear = document.getElementById("filmYear").value;
 
 //   // mise à jour du dom
- 
+
 // //mise à jour du localstorage
- 
+
 //  //fermer le modal
 //  filmForm.reset();
 //  modal.style.display= "none";
 //  currentFile = null
 // };
 
-
-
 function saveVideo(src, type, title, author, genre, year) {
   let videos = JSON.parse(localStorage.getItem("videos")) || [];
   // videos.push({ src, type, title, author, genre, year });
   // localStorage.setItem("videos", JSON.stringify(videos));
 
-
   //Ajoute un id unique
   const newVideo = {
     id: Date.now(),
-    src, type, title, author, genre, year
+    src,
+    type,
+    title,
+    author,
+    genre,
+    year,
   };
   videos.push(newVideo);
-  localStorage.setItem("videos", JSON.stringify(videos)); 
+  localStorage.setItem("videos", JSON.stringify(videos));
   return newVideo.id;
 }
 
 //charger le vidéo deja save
 
-  window.addEventListener("load", () => {
-    let videos = JSON.parse(localStorage.getItem("videos")) || [];
-    videos.forEach((video) => {
-      addFilmToDOM(
-        video.id,
-        video.src,
-        video.type,
-        video.title,
-        video.author,
-        video.genre,
-        video.year
-          
-     );
-    });
+window.addEventListener("load", () => {
+  let videos = JSON.parse(localStorage.getItem("videos")) || [];
+  videos.forEach((video) => {
+    addFilmToDOM(
+      video.id,
+      video.src,
+      video.type,
+      video.title,
+      video.author,
+      video.genre,
+      video.year
+    );
   });
+});
